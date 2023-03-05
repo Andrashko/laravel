@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\PostsController;
+use App\Http\Controllers\CommentsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,4 +20,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/andrashko/cv', [AboutController::class, 'index']);
+Route::get('/andrashko/cv', [AboutController::class, 'index'])->name('about');
+
+Route::resource('/posts', PostsController::class);
+Route::resource('/comments', CommentsController::class);
