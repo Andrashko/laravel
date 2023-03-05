@@ -8,16 +8,7 @@
         {{$post->text}}
     </p>
 
-    @if ($comments)
-        <h3> Comments </h3>
-        <ul>
-            @foreach($comments as $comment)
-                <li>
-                    {{$comment->text}}
-                </li>
-            @endforeach
-        </ul>
-    @else
-        No comments
-    @endif
+    @include('comment.index')
+    @include('comment.create', ['post_id'=>$post->id])
+
 @endsection
