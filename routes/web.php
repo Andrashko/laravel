@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\CommentsController;
-
+use  App\Http\Controllers\StudentsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,3 +24,4 @@ Route::get('/andrashko/cv', [AboutController::class, 'index'])->name('about');
 
 Route::resource('/posts', PostsController::class);
 Route::resource('/comments', CommentsController::class);
+Route::resource('/students', StudentsController::class);

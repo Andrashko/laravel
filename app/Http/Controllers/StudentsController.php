@@ -2,19 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Comment;
-use Illuminate\Http\RedirectResponse;
+use App\Models\Student;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 
-class CommentsController extends Controller
+class StudentsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $students = Student::all();
+        return $students;
     }
 
     /**
@@ -28,12 +27,9 @@ class CommentsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request)
     {
-        $comment = Comment::create(
-            $request->all(['post_id', 'text'])
-        );
-        return back();
+        //
     }
 
     /**
@@ -63,9 +59,8 @@ class CommentsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id): RedirectResponse
+    public function destroy(string $id)
     {
-        Comment::destroy($id);
-        return back();
+        //
     }
 }

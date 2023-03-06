@@ -6,14 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Comment extends Model
+class Student extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['post_id', 'text'];
-
-    public function post(): BelongsTo
+    public function group(): BelongsTo
     {
-        return $this->belongsTo(Post::class);
+        return $this->belongsTo(Group::class);
     }
 }
