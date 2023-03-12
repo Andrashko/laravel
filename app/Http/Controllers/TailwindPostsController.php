@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\View\View;
 
-class PostsController extends Controller
+class TailwindPostsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class PostsController extends Controller
     {
         $posts = Post::all();
         return view(
-            'post.index',
+            'tailwind.post.index',
             ['posts' => $posts]
         );
     }
@@ -25,7 +25,7 @@ class PostsController extends Controller
      */
     public function create(): View
     {
-        return view('post.create');
+        return view('tailwind.post.create');
     }
 
     /**
@@ -33,17 +33,14 @@ class PostsController extends Controller
      */
     public function store(Request $request): View
     {
-//        $post = new Post();
-//        $post->title = $request->input('title');
-//        $post->text = $request->input('text');
-//        $post->save();
-
         $post = Post::create(
             $request->all(['title', 'text'])
         );
         return view(
-            'post.store',
-            ['post' => $post]
+            'tailwind.post.resultpage',
+            [
+                'message' => "Post " . $post->title . " was created"
+            ]
         );
     }
 
@@ -54,7 +51,7 @@ class PostsController extends Controller
     {
         $post = Post::find($id);
         return view(
-            'post.show',
+            'tailwind.post.show',
             [
                 'post' => $post,
                 'comments' => $post->comments
@@ -69,7 +66,7 @@ class PostsController extends Controller
     {
         $post = Post::find($id);
         return view(
-            'post.edit',
+            'tailwind.post.edit',
             ['post' => $post]
         );
     }
@@ -84,9 +81,9 @@ class PostsController extends Controller
         $post->text = $request->input('text');
         $post->save();
         return view(
-            'post.update',
+            'tailwind.post.resultpage',
             [
-                'post' => $post
+                'message' => "Post " . $post->title . " was updated"
             ]
         );
     }
@@ -99,8 +96,10 @@ class PostsController extends Controller
         $post = Post::find($id);
         $post->delete();
         return view(
-            'post.destroy',
-            ['post' => $post]
+            'tailwind.post.resultpage',
+            [
+                'message' => "Post " . $post->title . " was deleted"
+            ]
         );
     }
 }

@@ -5,6 +5,7 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\CommentsController;
 use  App\Http\Controllers\StudentsController;
+use App\Http\Controllers\TailwindPostsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,3 +26,5 @@ Route::get('/andrashko/cv', [AboutController::class, 'index'])->name('about');
 Route::resource('/posts', PostsController::class);
 Route::resource('/comments', CommentsController::class);
 Route::resource('/students', StudentsController::class);
+
+Route::resource('/tailwind/posts', TailwindPostsController::class);

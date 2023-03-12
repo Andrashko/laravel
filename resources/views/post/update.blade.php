@@ -1,19 +1,11 @@
-<h1> Updated post </h1>
+@extends('layouts.posts')
+@section('content')
+    <p>
+        Post {{$post->title}} was updated
+    </p>
 
-<h3> {{$post->title }}</h3>
-<p>
-    {{$post->text}}
-</p>
-
-@if ($comments)
-    <h3> Comments </h3>
-    <ul>
-        @foreach($comments as $comment)
-            <li>
-                {{$comment->text}}
-            </li>
-        @endforeach
-    </ul>
-@else
-    No comments
-@endif
+    <p>
+        <a href="{{URL::to('posts')}}"> Return </a> to posts list
+    </p>
+    @endsectio
+@endsection
