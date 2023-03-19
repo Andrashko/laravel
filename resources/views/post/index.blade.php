@@ -1,4 +1,5 @@
 @extends('layouts.posts')
+
 @section('content')
     <h1>Posts</h1>
 

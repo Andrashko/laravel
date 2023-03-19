@@ -7,5 +7,4 @@
     <p>
         <a href="{{URL::to('posts')}}"> Return </a> to posts list
     </p>
-    @endsectio
 @endsection

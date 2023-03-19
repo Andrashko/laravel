@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\View\View;
+use App\Http\Requests\PostRequest;
 
 class TailwindPostsController extends Controller
 {
@@ -33,9 +34,15 @@ class TailwindPostsController extends Controller
      */
     public function store(Request $request): View
     {
-        $post = Post::create(
-            $request->all(['title', 'text'])
-        );
+        $validated = $request->validate([
+            'title' => 'required|unique:posts|max:5',
+            'text' => 'required',
+        ]);
+        if ($validated){
+            $post = Post::create(
+                $request->all(['title', 'text'])
+            );
+        }
         return view(
             'tailwind.post.resultpage',
             [
@@ -74,8 +81,9 @@ class TailwindPostsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id): View
+    public function update(PostRequest $request, string $id): View
     {
+        $validated = $request->validated();
         $post = Post::find($id);
         $post->title = $request->input('title');
         $post->text = $request->input('text');

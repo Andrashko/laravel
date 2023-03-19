@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\CommentsController;
-use  App\Http\Controllers\StudentsController;
+use App\Http\Controllers\StudentsController;
 use App\Http\Controllers\TailwindPostsController;
 /*
 |--------------------------------------------------------------------------
@@ -28,3 +28,4 @@ Route::resource('/comments', CommentsController::class);
 Route::resource('/students', StudentsController::class);
 
 Route::resource('/tailwind/posts', TailwindPostsController::class);
+

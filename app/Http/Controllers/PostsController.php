@@ -53,6 +53,10 @@ class PostsController extends Controller
     public function show(string $id): View
     {
         $post = Post::find($id);
+        if (!isset($post))
+        {
+            return abort(404);
+        }
         return view(
             'post.show',
             [
@@ -68,6 +72,10 @@ class PostsController extends Controller
     public function edit(string $id): View
     {
         $post = Post::find($id);
+        if (!isset($post))
+        {
+            return abort(404);
+        }
         return view(
             'post.edit',
             ['post' => $post]
@@ -80,6 +88,10 @@ class PostsController extends Controller
     public function update(Request $request, string $id): View
     {
         $post = Post::find($id);
+        if (!isset($post))
+        {
+            return abort(404);
+        }
         $post->title = $request->input('title');
         $post->text = $request->input('text');
         $post->save();
@@ -97,6 +109,10 @@ class PostsController extends Controller
     public function destroy(string $id): View
     {
         $post = Post::find($id);
+        if (!isset($post))
+        {
+            return abort(404);
+        }
         $post->delete();
         return view(
             'post.destroy',
