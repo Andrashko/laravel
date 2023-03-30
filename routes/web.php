@@ -18,7 +18,7 @@ use App\Http\Controllers\TailwindPostsController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/tailwind/posts');
 });
 
 Route::get('/andrashko/cv', [AboutController::class, 'index'])->name('about');

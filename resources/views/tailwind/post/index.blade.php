@@ -1,5 +1,6 @@
 @extends('tailwind.layouts.posts')
 @section('content')
+
     <nav class="flex">
         <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl flex-grow">
             Posts
@@ -13,9 +14,9 @@
     </nav>
 
     @forelse($posts as $post)
-        <article class="max-w-2xl rounded overflow-hidden shadow-lg my-5">
+        <article class="max-w-2xl rounded overflow-hidden shadow-lg my-10 px-1.5">
             <nav class="flex">
-                <h3 class="font-bold text-xl mb-2 flex-grow">
+                <h3 class="font-bold text-xl mb-2 flex-grow text-center">
                     <a href="{{URL::to('tailwind/posts') . '/' . $post->id}}">
                         {{$post->title}}
                     </a>
@@ -33,14 +34,15 @@
                     </button>
                 </form>
             </nav>
-            <p class="text-gray-700 text-base">
+            <p class="text-gray-700 text-base p-6">
                 {{$post->text}}
             </p>
-            <p> {{ count($post->comments) }} comments </p>
+            <p class="text-blue-800"> {{ count($post->comments) }} comments </p>
         </article>
     @empty
         <p>
             No posts
         </p>
     @endforelse
+
 @endsection

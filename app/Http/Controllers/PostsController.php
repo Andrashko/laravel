@@ -11,9 +11,11 @@ class PostsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
+    public function index(Request $request): View
     {
         $posts = Post::all();
+        $minId = $request->query->get("min", 0);
+        $posts = Post::where('id', '>', $minId)->get();
         return view(
             'post.index',
             ['posts' => $posts]
