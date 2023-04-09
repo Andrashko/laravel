@@ -1,11 +1,11 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AboutController;
+use App\Http\Controllers\TailwindPostsController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\CommentsController;
-use App\Http\Controllers\StudentsController;
-use App\Http\Controllers\TailwindPostsController;
+use App\Http\Controllers\AboutController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,14 +18,33 @@ use App\Http\Controllers\TailwindPostsController;
 */
 
 Route::get('/', function () {
-    return redirect('/tailwind/posts');
+    return view('welcome');
+});
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 Route::get('/andrashko/cv', [AboutController::class, 'index'])->name('about');
-
 Route::resource('/posts', PostsController::class);
-Route::resource('/comments', CommentsController::class);
-Route::resource('/students', StudentsController::class);
+//Route::resource('/comments', CommentsController::class)
+//    ->middleware('auth')->except(['index']);
+//Route::resource('/comments', CommentsController::class)
+//    ->only(['index']);
+Route::post('/comments', [CommentsController::class, 'store'])
+    ->name('comments.store');
+Route::delete('/comments/{id}', [CommentsController::class, 'destroy'])
+    ->middleware('auth')->name("comments.destroy");
+Route::resource('/tailwind/posts', TailwindPostsController::class)
+    ->middleware('auth')->except(['index','show']);
+Route::resource('/tailwind/posts', TailwindPostsController::class)
+    ->only(['index','show']);
 
-Route::resource('/tailwind/posts', TailwindPostsController::class);
+require __DIR__.'/auth.php';
 

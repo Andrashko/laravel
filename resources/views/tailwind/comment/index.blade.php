@@ -8,11 +8,11 @@
                 <p class="flex-grow">
                     {{$comment->text}}
                 </p>
-                <form action="{{URL::to('comments') . '/' . $comment->id}}" method="post">
+                <form action="{{ route('comments.destroy', ['id' => $comment->id]) }}" method="post">
                     @csrf
                     <input type="hidden" name="_method" value="DELETE">
                     <button type="submit"
-                            class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+                            class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
                     >
                         Delete
                     </button>

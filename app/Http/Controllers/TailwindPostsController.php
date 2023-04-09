@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\View\View;
 use App\Http\Requests\PostRequest;
-use  App\Http\Requests\StorePostRequest;
+use Illuminate\Support\Facades\Gate;
 
 class TailwindPostsController extends Controller
 {
@@ -33,8 +33,9 @@ class TailwindPostsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePostRequest $request): View
+    public function store(PostRequest $request): View
     {
+
 //        $validated = $request->validate([
 //            'title' => 'required|unique:posts|max:5',
 //            'text' => 'required',
@@ -81,7 +82,7 @@ class TailwindPostsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(StorePostRequest $request, string $id): View
+    public function update(PostRequest $request, string $id): View
     {
         $validatedPost = $request->validated();
         $post = Post::find($id);
@@ -101,7 +102,14 @@ class TailwindPostsController extends Controller
      */
     public function destroy(string $id): View
     {
+        if (! Gate::allows('delete-post')) {
+            abort(403, "Not allowed by gate");
+        }
+
         $post = Post::find($id);
+        if ($this->authorize('delete', $post)) {
+            abort(403, "Not allowed by policy");
+        }
         $post->delete();
         return view(
             'tailwind.post.resultpage',
