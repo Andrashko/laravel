@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\View\View;
 
+use function MongoDB\BSON\toJSON;
+
 class PostsController extends Controller
 {
     /**
