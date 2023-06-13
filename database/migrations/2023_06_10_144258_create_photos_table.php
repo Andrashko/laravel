@@ -13,9 +13,17 @@ return new class extends Migration
     {
         Schema::create('photos', function (Blueprint $table) {
             $table->id();
+            $table->string('author');
+            $table->string('title');
+            $table->text('description');
+            $table->string('file_url');
+            $table->text('hashtags')->nullable();
+            $table->date('publication_date');
+            $table->integer('likes')->default(0);
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.

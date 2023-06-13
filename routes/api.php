@@ -17,3 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+ // Route::get('/photos', 'PhotoController@index');
+Route::get('/photos', [PhotoController::class, 'index']);
+// Route::post('/photos', 'PhotoController@store');
+Route::post('/photos', [\App\Http\Controllers\PhotoController::class, 'store']);
