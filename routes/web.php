@@ -49,5 +49,5 @@ Route::resource('/tailwind/posts', TailwindPostsController::class)
 Route::get('token/update', [ApiTokenController::class, 'update'])
     ->middleware('auth')->name('update_token');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 

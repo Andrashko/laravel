@@ -2,7 +2,7 @@
 @section('content')
     <h1> Edit post</h1>
 
-    <form action="{{URL::to('posts') .'/' . $post->id}}" method="post">
+    <form action="{{URL::to('posts') .'edit.blade.php/' . $post->id}}" method="post">
         @csrf
         <input type="hidden" name="_method" value="PATCH">
         <label>
